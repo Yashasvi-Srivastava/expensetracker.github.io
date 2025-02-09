@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Sixtyfour&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>EXPENSE TRACKER</h1>
+        <hr />
+        <div class="title-container">
+            <div class="credits" id="credits-title">Credits</div>
+            <div class="debits" id="debits-title">Debits</div>
+        </div>        
+
+        <!-- Navbar -->
+        <nav>
+            <button id="show-expenses-btn">Show Expenses</button>
+            <button id="show-chart-btn">Show Chart</button>
+            <button id="export-expenses-btn">Export Expenses</button>
+        </nav>
+
+        <!-- Expense Form -->
+        <form id="expense-form">
+            <input type="text" id="expense-name" placeholder="Expense Name" required aria-label="Expense Name">
+
+            <!-- Currency Selection for Input -->
+            <label for="input-currency">Enter Amount In:</label>
+            <select id="input-currency">
+                <option value="INR">Indian Rupee (INR)</option>
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="AUD">Australian Dollar (AUD)</option>
+                <option value="CAD">Canadian Dollar (CAD)</option>
+                <option value="CHF">Swiss Franc (CHF)</option>
+                <option value="CNY">Chinese Yuan (CNY)</option>
+                <option value="SGD">Singapore Dollar (SGD)</option>
+                <option value="BRL">Brazilian Real (BRL)</option>
+                <option value="AED">UAE Dirham (AED)</option>
+                <option value="MXN">Mexican Peso (MXN)</option>
+                <option value="ZAR">South African Rand (ZAR)</option>
+                <option value="SEK">Swedish Krona (SEK)</option>
+                <option value="NZD">New Zealand Dollar (NZD)</option>
+                <option value="KRW">South Korean Won (KRW)</option>
+                <option value="RUB">Russian Ruble (RUB)</option>
+                <option value="SAR">Saudi Riyal (SAR)</option>
+                <option value="TRY">Turkish Lira (TRY)</option>
+                <option value="IDR">Indonesian Rupiah (IDR)</option>
+                <option value="NOK">Norwegian Krone (NOK)</option>
+                <option value="THB">Thai Baht (THB)</option>
+                <option value="PLN">Polish Zloty (PLN)</option>
+                <option value="HUF">Hungarian Forint (HUF)</option>
+                <option value="CZK">Czech Koruna (CZK)</option>
+                <option value="CLP">Chilean Peso (CLP)</option>
+                <option value="PHP">Philippine Peso (PHP)</option>
+                <option value="MYR">Malaysian Ringgit (MYR)</option>
+                <option value="COP">Colombian Peso (COP)</option>
+                <option value="TWD">Taiwan Dollar (TWD)</option>
+                <option value="RON">Romanian Leu (RON)</option>
+                <option value="DZD">Algerian Dinar (DZD)</option>
+                <option value="EGP">Egyptian Pound (EGP)</option>
+                <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                <option value="VND">Vietnamese Dong (VND)</option>
+                <option value="IQD">Iraqi Dinar (IQD)</option>
+                <option value="PKR">Pakistani Rupee (PKR)</option>
+                <option value="BDT">Bangladeshi Taka (BDT)</option>
+            </select>
+
+            <input type="number" id="expense-amount" placeholder="Amount" required aria-label="Expense Amount">
+
+            <!-- Convert to Another Currency -->
+            <label for="currency">Convert to:</label>
+            <select id="currency">
+                <!-- Copy all options from input-currency -->
+                <option value="INR">Indian Rupee (INR)</option>
+                <option value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="AUD">Australian Dollar (AUD)</option>
+                <option value="CAD">Canadian Dollar (CAD)</option>
+                <option value="CHF">Swiss Franc (CHF)</option>
+                <option value="CNY">Chinese Yuan (CNY)</option>
+                <option value="SGD">Singapore Dollar (SGD)</option>
+                <option value="BRL">Brazilian Real (BRL)</option>
+                <option value="AED">UAE Dirham (AED)</option>
+                <option value="MXN">Mexican Peso (MXN)</option>
+                <option value="ZAR">South African Rand (ZAR)</option>
+                <option value="SEK">Swedish Krona (SEK)</option>
+                <option value="NZD">New Zealand Dollar (NZD)</option>
+                <option value="KRW">South Korean Won (KRW)</option>
+                <option value="RUB">Russian Ruble (RUB)</option>
+                <option value="SAR">Saudi Riyal (SAR)</option>
+                <option value="TRY">Turkish Lira (TRY)</option>
+                <option value="IDR">Indonesian Rupiah (IDR)</option>
+                <option value="NOK">Norwegian Krone (NOK)</option>
+                <option value="THB">Thai Baht (THB)</option>
+                <option value="PLN">Polish Zloty (PLN)</option>
+                <option value="HUF">Hungarian Forint (HUF)</option>
+                <option value="CZK">Czech Koruna (CZK)</option>
+                <option value="CLP">Chilean Peso (CLP)</option>
+                <option value="PHP">Philippine Peso (PHP)</option>
+                <option value="MYR">Malaysian Ringgit (MYR)</option>
+                <option value="COP">Colombian Peso (COP)</option>
+                <option value="TWD">Taiwan Dollar (TWD)</option>
+                <option value="RON">Romanian Leu (RON)</option>
+                <option value="DZD">Algerian Dinar (DZD)</option>
+                <option value="EGP">Egyptian Pound (EGP)</option>
+                <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                <option value="VND">Vietnamese Dong (VND)</option>
+                <option value="IQD">Iraqi Dinar (IQD)</option>
+                <option value="PKR">Pakistani Rupee (PKR)</option>
+                <option value="BDT">Bangladeshi Taka (BDT)</option>
+            </select>
+            <p id="converted-amount"></p>
+
+            <div class="date-picker">
+                <button type="button" id="set-today">Today</button>
+                <input type="date" id="expense-date" required aria-label="Expense Date">
+            </div>
+
+            <select id="expense-category" required aria-label="Expense Category">
+                <option value="" disabled selected>Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <textarea id="expense-note" placeholder="Add a note (optional)" aria-label="Expense Note"></textarea>
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <!-- Expense List -->
+        <div id="expense-section" class="hidden">
+            <h2>EXPENSES</h2>
+            <ul id="expense-list"></ul>
+        </div>
+
+        <!-- Chart Section -->
+        <div id="chart-section" class="hidden">
+            <h2>Spending Chart</h2>
+            <canvas id="expense-chart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
